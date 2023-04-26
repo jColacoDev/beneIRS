@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "2.0.1",
+  "description": "Node Express server",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "João Colaço",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "mongoose": "^6.8.4",
+    "node-fetch": "^2.6.9",
+    "nodemon": "^2.0.20",
+    "shortid": "^2.2.16"
+  }
+}
