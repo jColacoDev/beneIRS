@@ -12,6 +12,18 @@
     
         p{
             width: 20em;
+            text-align: justify;
+            font-size: 1.05em;
         }
+        p::before {
+            content: "";
+          }
+          
+          p::before {
+            // Make the first letter of each word bold
+            &:first-letter {
+              font-weight: bold;
+            }
+          }
     }
 }

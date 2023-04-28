@@ -114,7 +114,7 @@ export default function BeneList() {
         <button onClick={handleApiCall}>Upload and Save</button>
       */}
       <section className="filter">
-        <label htmlFor="localidade">Filter by Localidade:</label>
+        <label htmlFor="localidade">Filtrar por Localidade:</label>
         <select id="localidade" value={selectedLocalidade} onChange={handleLocalidadeChange}>
           <option value="">All</option>
           {Array.from(new Set(recordsData.map(item => item.LOCALIDADE))).map(localidade => (

@@ -1,4 +1,10 @@
 @import "./reset.css";
+@import url('https://fonts.cdnfonts.com/css/google-sans');
+
+
+*{
+  font-family: 'Product Sans', sans-serif;
+}
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
