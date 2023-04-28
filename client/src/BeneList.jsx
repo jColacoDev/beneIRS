@@ -165,7 +165,7 @@ export default function BeneList() {
   
   return (
     <div className="BeneList">
-      {/* 
+{/*       
         <h1>File Uploader</h1>
         <input type="file" onChange={handleFileUpload} />
         <button onClick={handleApiCall}>Upload and Save</button>

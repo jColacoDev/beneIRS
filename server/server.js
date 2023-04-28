@@ -28,7 +28,7 @@ const startMongoDb = async (cloud = false) => {
         console.log('DB connection error',error)
     }
 };
-startMongoDb();
+startMongoDb(true);
 
 const entitySchema = new mongoose.Schema({
     NIF: String,
@@ -58,6 +58,7 @@ app.post('/api/data', async (req, res) => {
 app.get('/api/data', async (req, res) => {
     try {
       const data = await EntityData.find();
+      console.log(data)
       res.json(data);
     } catch (err) {
       console.error(err);
