@@ -15,7 +15,8 @@
         justify-content: center;
         align-items: center;
         gap: .5em;
-
+        flex-wrap: wrap;
+        
         a{
             text-decoration: underline;
             

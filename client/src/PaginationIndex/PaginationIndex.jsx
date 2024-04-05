@@ -1,15 +1,30 @@
 /* eslint-disable react/prop-types */
+import { useEffect, useState } from 'react';
 import './PaginationIndex.scss'
 
 export default function PaginationIndex({page, setPage, totalPages}) {
+    const [maxPagination, setMaxPagination] = useState(paginationFromWidth());
 
-    const maxPagination = 5;
+    useEffect(() => {
+        const handleResize = () => {
+            setMaxPagination(paginationFromWidth());
+        };
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     function handleNextClick(e){
         e.preventDefault();
         page < totalPages && setPage(page + 1);
     }
 
+    function paginationFromWidth(){
+        return window.innerWidth > 690 ? 8 : 
+        window.innerWidth > 590 ? 6 : 
+        window.innerWidth > 390 ? 4 : 2;
+    }
     function handlePrevClick(e){
         e.preventDefault();
         page > 1 && setPage(page - 1)
@@ -18,8 +33,6 @@ export default function PaginationIndex({page, setPage, totalPages}) {
         e.preventDefault();
         setPage(parseInt(e.currentTarget.dataset.index))
     }
-
-    
 
     const pagination = () =>{
 

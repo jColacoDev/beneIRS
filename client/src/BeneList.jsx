@@ -150,6 +150,14 @@ export default function BeneList() {
   }
 
   
+  const resetFilters = (event) => {
+    setLocalidadeSearchTerm("");
+    setNomeSearchTerm("");
+    setNifSearchTerm("");
+    setSelectedOrder("asc");
+    setFilteredData(originalRecordsData);
+  }
+
   const handleLocalidadeChange = (event) => {
     const localidade = event.target.value;
     setSelectedLocalidade(localidade);
@@ -214,19 +222,20 @@ export default function BeneList() {
     </section>
   </section>
   </article>
-<section className="blobBtns">
-  <BlobBtn text={"Escolher um beneficiário ao calhas de todos"} handleClick={()=>handleRandomClick(false)} />
-  <BlobBtn text={"Escolher um beneficiário ao calhas com os filtros"} handleClick={()=>handleRandomClick(true)} />
-</section>
-<section className="resetBtn">
-  <BlobBtn text={"Reset todos os filtros"} handleClick={()=>setFilteredData(originalRecordsData)} />
-    <article className='tableInfo'>
-      <span>Total de entidades: {originalRecordsData.length}</span>
-      <span>Entidades filtradas: {filteredData.length}</span>
-    </article>
-</section>
-
-</section>
+  <div className="blobs">
+    <section className="blobBtns">
+      <BlobBtn text={"Escolher um beneficiário ao calhas de todos"} handleClick={()=>handleRandomClick(false)} />
+      <BlobBtn text={"Escolher um beneficiário ao calhas com os filtros"} handleClick={()=>handleRandomClick(true)} />
+    </section>
+    <section className="resetBtn">
+      <BlobBtn text={"Reset todos os filtros"} handleClick={()=>resetFilters()} />
+        <article className='tableInfo'>
+          <span>Total de entidades: {originalRecordsData.length}</span>
+          <span>Entidades filtradas: {filteredData.length}</span>
+        </article>
+    </section>
+  </div>
+  </section>
 
 
       <section className="table">
