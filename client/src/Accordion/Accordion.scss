@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
+
+.Accordion{
+
+    > * {
+        max-width: 40em;
+        margin: 0 auto;
+    }
+
+    .main-title {
+    padding-top: .5em;
+    margin-bottom: 1.5em;
+    text-align: center;
+    font-family: 'Abril Fatface', cursive;
+    font-size: 3em;
+    color: #2e8074;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // deco lines
+    &:before, &:after {
+        content: '';
+        display: block;
+        margin: 0 0.2rem;
+        flex: 1;
+        border-bottom: 1px solid #2e8074;
+    }
+    }
+    input[type='radio'] {
+    display: none;
+    &:checked + .item {
+        .title {
+        color: #fff;
+        border-color: #2e8074;
+        background-color: #2e8074;
+
+        &:after {
+            transform: rotate(180deg);
+        }
+        }
+        .content {
+        // for animation! can use padding or margin here
+        margin-top: 0.3rem;
+        margin-bottom: 0.3rem;
+        // show content
+        height: auto;
+        opacity: 1;
+        visibility: visible;
+        transition: all 0.3s, opacity 0.7s; // fade-in slow
+        }
+    }
+    }
+    .item {
+    display: block;
+    margin-bottom: 0.1rem;
+    }
+    .title {
+    border-radius: 0.3rem;
+    color: #2e8074;
+    border: 1px solid;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    // aligned arrow
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // arrow icon
+    padding: 0.5em;
+
+            
+    &:hover{
+        color: #fff;
+        border-color: #2e807490;
+        background-color: #2e807490;
+    }
+    &:after {
+        content: '\25bc';
+        display: inline-block;
+        font-size: 12px;
+    }
+    }
+    .content {
+    width: 95%;
+    margin: 0 auto;
+    padding: 0 0.3rem;
+    line-height: 1.6;
+    color: #2e8074;
+    border: 1px solid;
+    border-width: 0 1px;
+    // default disappear
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s; // fade-out fast 
+    }
+
+}

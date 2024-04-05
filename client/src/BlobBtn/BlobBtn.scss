@@ -1,9 +1,9 @@
 .BlobBtn{
 
-    --blobColor: tomato;
+    --blobColor: #2e8074;
     
-    max-width: 20em;
-    max-height: 5em;
+    max-width: 16em;
+    max-height: 3em;
 
       .buttons {
         margin-top: 50px;
@@ -13,8 +13,8 @@
       .blob-btn {
         z-index: 1;
         position: relative;
-        padding: 20px 46px;
-        margin-bottom: 30px;
+        padding: 12px 20px;
+        margin-bottom: 25px;
         text-align: center;
         text-transform: uppercase;
         color: var(--blobColor);
@@ -34,21 +34,21 @@
         top: 0;
         width: 100%;
         height: 100%;
-        border: 6px solid var(--blobColor);
+        border: 4px solid var(--blobColor);
       }
       .blob-btn:after {
         content: "";
         z-index: -2;
         position: absolute;
-        left: 9px;
-        top: 9px;
+        left: 5px;
+        top: 5px;
         width: 100%;
         height: 100%;
-        border: 6px solid #222;
+        border: 4px solid #222;
         transition: all 0.3s 0.2s;
       }
       .blob-btn:hover {
-        color: #222;
+        color: white;
       }
       .blob-btn:hover:after {
         transition: all 0.3s;

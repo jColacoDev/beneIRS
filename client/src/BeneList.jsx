@@ -23,13 +23,14 @@ export default function BeneList() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/data');
+        // const response = await fetch('http://localhost:8000/api/birs/data');
+        const response = await fetch('https://jcolaco.dev/api/birs/data');
         if (response.ok) {
           const data = await response.json();
           if (data) {
             setRecordsData(data);
             setOriginalRecordsData([...data]); // Set originalRecordsData to a copy of the recordsData state
-            setFilteredData(data); // Update filteredData here
+            setFilteredData([...data]); // Update filteredData here
           }
         } else {
           console.error('Error:', response.statusText);
@@ -46,7 +47,7 @@ export default function BeneList() {
     const normalizedNomeSearchTerm = nomeSearchTerm.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     const normalizedNifSearchTerm = nifSearchTerm.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     const searchedData = originalRecordsData.filter(record =>
-      record.LOCALIDADE.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(normalizedLocalidadeSearchTerm) &&
+      record.LOCALIDADE?.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(normalizedLocalidadeSearchTerm) &&
       record.NOME.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(normalizedNomeSearchTerm) &&
       record.NIF.toString().includes(normalizedNifSearchTerm)
     );
@@ -102,7 +103,8 @@ export default function BeneList() {
     for (let i = 0; i < chunks.length; i++) {
       const chunk = chunks[i];
       try {
-        const response = await fetch('http://localhost:5000/api/data', {
+        // const response = await fetch('http://localhost:8000/api/birs/data', {
+        const response = await fetch('https://jcolaco.dev/api/birs/data', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -157,6 +159,7 @@ export default function BeneList() {
   };
 
   function normalize(str) {
+    // console.log(str)
     return str.normalize("NFD")  // convert accented characters to their basic forms
               .replace(/[\u0300-\u036f]/g, "")  // remove accents
               .replace(/[^\w\s]/g, "")  // remove punctuation
@@ -165,13 +168,10 @@ export default function BeneList() {
   
   return (
     <div className="BeneList">
-{/*       
-        <h1>File Uploader</h1>
-        <input type="file" onChange={handleFileUpload} />
-        <button onClick={handleApiCall}>Upload and Save</button>
-      */}
 <section className="filter">
-  <label htmlFor="nifFilter">Filtrar por NIF:&nbsp; </label>
+
+  <article className='filtersInput'>
+  <label htmlFor="nifFilter">NIF:&nbsp; </label>
 <input
   id='nifFilter'
   type="number"
@@ -183,10 +183,8 @@ export default function BeneList() {
     e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0,9)
   }}
 />
-  <br />
-  <br />
 
-  <label htmlFor="nameFilter">Filtrar por Nome:&nbsp; </label>
+  <label htmlFor="nameFilter">Nome:&nbsp; </label>
   <input
     id="nameFilter"
     type="text"
@@ -194,43 +192,44 @@ export default function BeneList() {
     onChange={(event) => setNomeSearchTerm(event.target.value)}
     placeholder="...nome"
   />
-  <br />
-  <br />
 
   <section className="localidadeFilter">
-    <label htmlFor="localidade">Filtrar por Localidade:&nbsp; </label>
+    <label htmlFor="localidade">Localidade:&nbsp; </label>
     <input type="text" value={localidadeSearchTerm} onChange={handleChange} 
       placeholder="...localidade"
     />
     <select id="localidade" value={selectedLocalidade} onChange={handleLocalidadeChange}>
     <option value="">All</option>
     { filteredData &&
-      Array.from(new Set(filteredData?.map(item => normalize(item?.LOCALIDADE)))) 
+      Array.from(new Set(filteredData?.map(item => item?.LOCALIDADE ? normalize(item?.LOCALIDADE) : console.log(item)))) 
         ?.map(localidade => (
           <option key={localidade} value={localidade}>{localidade}</option>
       ))
     }
     </select>
+
     <section className="orderBtns">
       <button className={selectedOrder === 'asc' ? "selected" : ""} onClick={()=>setSelectedOrder('asc')}>Ordem Ascendente</button>
       <button className={selectedOrder === 'desc' ? "selected" : ""} onClick={()=>setSelectedOrder('desc')}>Ordem Descendente</button>
     </section>
   </section>
-
-<section className="resetBtn">
-  <BlobBtn text={"Reset todos os filtros"} handleClick={()=>setFilteredData(originalRecordsData)} />
-</section>
+  </article>
 <section className="blobBtns">
   <BlobBtn text={"Escolher um beneficiário ao calhas de todos"} handleClick={()=>handleRandomClick(false)} />
   <BlobBtn text={"Escolher um beneficiário ao calhas com os filtros"} handleClick={()=>handleRandomClick(true)} />
+</section>
+<section className="resetBtn">
+  <BlobBtn text={"Reset todos os filtros"} handleClick={()=>setFilteredData(originalRecordsData)} />
+    <article className='tableInfo'>
+      <span>Total de entidades: {originalRecordsData.length}</span>
+      <span>Entidades filtradas: {filteredData.length}</span>
+    </article>
 </section>
 
 </section>
 
 
       <section className="table">
-        <span className="tableInfo">Todas as entidades: {originalRecordsData.length}</span>
-        <span className="tableInfo">Entidades filtradas: {filteredData.length}</span>
         <ul>
           {paginatedData?.map((item) => (
             <li key={item._id}>

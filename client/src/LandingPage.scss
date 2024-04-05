@@ -5,7 +5,7 @@
     padding: 2em 0;
     
     h2{
-        color: #ff6347;
+    color: #2e8074;
         padding: 0 1em;
     }
 
@@ -20,7 +20,7 @@
             text-decoration: underline;
             
             &:hover{
-                color: #ac5343;
+                color: #2e8074;
             }
         }
     }
@@ -50,5 +50,10 @@
                 font-weight: bold;
             }
           }
+    }
+
+    .infoP{
+        margin: 0 auto;
+        text-align: center;
     }
 }

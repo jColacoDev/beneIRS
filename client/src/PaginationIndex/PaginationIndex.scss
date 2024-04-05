@@ -82,7 +82,7 @@ $borderColor: #0000001a;
     transition: all 170ms linear;
 
     &:before{
-      background: #ff634790;
+      background: #2e807490;
       border-radius: 50%;
       content: "";
       cursor: pointer;
@@ -107,7 +107,7 @@ $borderColor: #0000001a;
     }
 
     &.active{
-      background: #ff634790;
+      background: #2e807490;
       color: #000000;
     }
   }
